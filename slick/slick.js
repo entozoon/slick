@@ -1307,6 +1307,11 @@
 
         function loadImages(imagesScope) {
             $('img[data-lazy]', imagesScope).each(function() {
+                 
+                // Add .lazy-loading class to slider while lazy loading images
+                if ($('img[data-lazy]', _.$slider).not('[src]').length) {
+                    _.$slider.addClass('lazy-loading');
+                }
 
                 var image = $(this),
                     imageSource = $(this).attr('data-lazy'),
@@ -1321,6 +1326,9 @@
                                     image
                                         .removeAttr('data-lazy')
                                         .removeClass('slick-loading');
+
+                                        // Remove .lazy-loading class after loading
+                                        _.$slider.removeClass('lazy-loading');
                                 });
                         });
                 };
